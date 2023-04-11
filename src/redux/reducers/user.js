@@ -1,4 +1,4 @@
-import { LOGIN } from '../Types/userType';
+import { LOGIN } from '../types/userType';
 
 const INITIAL_STATE = {
   email: '',
