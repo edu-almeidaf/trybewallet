@@ -1,1 +1,2 @@
 export const EXPENSE_REQUEST = 'EXPENSE_REQUEST';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';

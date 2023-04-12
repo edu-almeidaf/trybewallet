@@ -1,5 +1,5 @@
 import { GET_CURRENCIES } from '../types/currencyType';
-import { EXPENSE_REQUEST } from '../types/expenseType';
+import { EXPENSE_REQUEST, DELETE_EXPENSE } from '../types/expenseType';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -27,6 +27,11 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       expenses: [...state.expenses, incrementId(payload)],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== payload),
     };
   default:
     return state;
