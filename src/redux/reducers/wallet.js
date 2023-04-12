@@ -1,4 +1,5 @@
 import { GET_CURRENCIES } from '../types/currencyType';
+import { EXPENSE_REQUEST } from '../types/expenseType';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -7,12 +8,25 @@ const INITIAL_STATE = {
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
 };
 
-const walletReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+let nextId = 0;
+
+const incrementId = (payload) => {
+  const newPayload = { ...payload, id: nextId };
+  nextId += 1;
+  return newPayload;
+};
+
+const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
   case GET_CURRENCIES:
     return {
       ...state,
-      currencies: action.payload,
+      currencies: payload,
+    };
+  case EXPENSE_REQUEST:
+    return {
+      ...state,
+      expenses: [...state.expenses, incrementId(payload)],
     };
   default:
     return state;

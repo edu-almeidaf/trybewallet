@@ -5,6 +5,7 @@ export const getCurrencies = (payload) => ({
   type: GET_CURRENCIES,
   payload,
 });
+
 export const failedRequest = (error) => ({
   type: FAILED_REQUEST,
   payload: error,
