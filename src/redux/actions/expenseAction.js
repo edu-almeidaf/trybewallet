@@ -1,4 +1,9 @@
-import { EXPENSE_REQUEST, DELETE_EXPENSE } from '../types/expenseType';
+import {
+  EXPENSE_REQUEST,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  SAVE_EDITED_EXPENSE,
+} from '../types/expenseType';
 import fetchCurrencies from '../../utils/fetchCurrencies';
 
 const expenseRequest = (expenses, data) => ({
@@ -17,4 +22,17 @@ export const fetchExpenseThunk = (expenses) => async (dispatch) => {
 export const deleteExpense = (id) => ({
   type: DELETE_EXPENSE,
   payload: id,
+});
+
+export const editExpense = (id) => ({
+  type: EDIT_EXPENSE,
+  payload: id,
+});
+
+export const saveEditedExpense = (expense, id) => ({
+  type: SAVE_EDITED_EXPENSE,
+  payload: {
+    expense,
+    id,
+  },
 });
