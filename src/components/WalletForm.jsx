@@ -64,7 +64,7 @@ class WalletForm extends Component {
       <div className="wallet-form">
         <form>
           <input
-            type="text"
+            type="number"
             data-testid="value-input"
             name="value"
             placeholder="Digite o valor da despesa"
