@@ -6,6 +6,7 @@ import {
   fetchExpenseThunk,
   saveEditedExpense,
   setAskToFalse,
+  setDeleteToFalse,
 } from '../redux/actions/expenseAction';
 
 class WalletForm extends Component {
@@ -23,7 +24,7 @@ class WalletForm extends Component {
   }
 
   componentDidUpdate() {
-    const { askToEdit, idToEdit, expenses, dispatch } = this.props;
+    const { askToEdit, askToDelete, idToEdit, expenses, dispatch } = this.props;
     if (askToEdit) {
       const task = expenses[idToEdit];
       const { value, description, currency, method, tag } = task;
@@ -31,6 +32,16 @@ class WalletForm extends Component {
         value, description, currency, method, tag,
       });
       dispatch(setAskToFalse());
+    }
+    if (askToDelete) {
+      this.setState({
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'dinheiro',
+        tag: 'alimentacao',
+      });
+      dispatch(setDeleteToFalse());
     }
   }
 
@@ -165,6 +176,7 @@ WalletForm.propTypes = {
     tag: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   askToEdit: PropTypes.bool.isRequired,
+  askToDelete: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
@@ -173,6 +185,7 @@ const mapStateToProps = ({ wallet }) => ({
   idToEdit: wallet.idToEdit,
   editor: wallet.editor,
   expenses: wallet.expenses,
+  askToDelete: wallet.askToDelete,
 });
 
 export default connect(mapStateToProps)(WalletForm);

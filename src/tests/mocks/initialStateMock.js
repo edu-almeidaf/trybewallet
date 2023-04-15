@@ -24,6 +24,7 @@ const initialStateMock = {
     editor: false,
     askToEdit: false,
     idToEdit: 0,
+    askToDelete: false,
   },
 };
 
