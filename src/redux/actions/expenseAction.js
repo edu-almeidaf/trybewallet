@@ -3,6 +3,7 @@ import {
   DELETE_EXPENSE,
   EDIT_EXPENSE,
   SAVE_EDITED_EXPENSE,
+  SET_ASK_TO_FALSE,
 } from '../types/expenseType';
 import fetchCurrencies from '../../utils/fetchCurrencies';
 
@@ -35,4 +36,8 @@ export const saveEditedExpense = (expense, id) => ({
     expense,
     id,
   },
+});
+
+export const setAskToFalse = () => ({
+  type: SET_ASK_TO_FALSE,
 });

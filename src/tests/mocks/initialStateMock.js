@@ -22,6 +22,7 @@ const initialStateMock = {
     ],
     expenses: [],
     editor: false,
+    askToEdit: false,
     idToEdit: 0,
   },
 };

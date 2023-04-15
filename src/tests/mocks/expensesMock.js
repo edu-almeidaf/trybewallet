@@ -44,6 +44,7 @@ const expensesMock = {
     ],
     editor: false,
     idToEdit: 0,
+    askToEdit: false,
   },
 };
 

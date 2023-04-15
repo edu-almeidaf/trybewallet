@@ -4,6 +4,7 @@ import {
   DELETE_EXPENSE,
   EDIT_EXPENSE,
   SAVE_EDITED_EXPENSE,
+  SET_ASK_TO_FALSE,
 } from '../types/expenseType';
 
 const INITIAL_STATE = {
@@ -11,6 +12,7 @@ const INITIAL_STATE = {
   expenses: [],
   editor: false,
   idToEdit: 0,
+  askToEdit: false,
 };
 
 let nextId = 0;
@@ -56,6 +58,7 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
       ...state,
       editor: true,
       idToEdit: payload,
+      askToEdit: true,
     };
 
   case SAVE_EDITED_EXPENSE:
@@ -65,6 +68,11 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
       editor: false,
     };
 
+  case SET_ASK_TO_FALSE:
+    return {
+      ...state,
+      askToEdit: false,
+    };
   default:
     return state;
   }

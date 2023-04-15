@@ -32,22 +32,26 @@ describe('Testes das funções do botão "Editar"', () => {
     expect(screen.queryByRole('button', { name: /adicionar despesa/i })).not.toBeInTheDocument();
   });
 
-  test('Verifica se ao editar uma despesa, seus dados são alterados', () => {
+  test('Verifica se ao editar uma despesa, seus dados são alterados', async () => {
+    // const handleChange = jest.fn();
     renderWithRouterAndRedux(<Wallet />, { initialState: expensesMock });
     const allEditBtn = screen.getAllByRole('button', { name: /editar/i });
     userEvent.click(allEditBtn[0]);
 
-    const valueInput = screen.getByPlaceholderText(/digite o valor da despesa/i);
-    const descriptionInput = screen.getByPlaceholderText(/descrição/i);
+    const valueInput = await screen.findByPlaceholderText(/digite o valor da despesa/i);
+    const descriptionInput = await screen.findByPlaceholderText(/descrição/i);
     const editBtn = screen.getByRole('button', { name: /editar despesa/i });
     // const methodInput = screen.getByRole('combobox', { name: /forma de pagamento:/i });
+    // fireEvent.change(methodInput, { target: { value: 'Cartão de dédito' } });
+    userEvent.clear(valueInput);
     userEvent.type(valueInput, '30');
+    userEvent.clear(descriptionInput);
     userEvent.type(descriptionInput, 'Gasolina');
     userEvent.click(editBtn);
 
     expect(screen.queryByRole('cell', { name: /almoço/i })).not.toBeInTheDocument();
     expect(screen.getByRole('cell', { name: /gasolina/i })).toBeInTheDocument();
-
+    // expect(screen.getByRole('cell', { name: /cartão de débito/i })).toBeInTheDocument();
     expect(screen.queryByRole('cell', { name: /10\.00/i })).not.toBeInTheDocument();
     expect(screen.getByRole('cell', { name: /30\.00/i })).toBeInTheDocument();
     expect(screen.queryByRole('cell', { name: /47\.53/i })).not.toBeInTheDocument();

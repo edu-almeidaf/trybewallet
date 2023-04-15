@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCurrenciesThunk } from '../redux/actions/currencyAction';
-import { fetchExpenseThunk, saveEditedExpense } from '../redux/actions/expenseAction';
+import {
+  fetchExpenseThunk,
+  saveEditedExpense,
+  setAskToFalse,
+} from '../redux/actions/expenseAction';
 
 class WalletForm extends Component {
   state = {
@@ -18,13 +22,17 @@ class WalletForm extends Component {
     dispatch(fetchCurrenciesThunk());
   }
 
-  // componentDidUpdate() {
-  //   const { editor, idToEdit, expenses } = this.props;
-  //   if (editor) {
-  //     const task = expenses[idToEdit];
-  //     console.log(task);
-  //   }
-  // }
+  componentDidUpdate() {
+    const { askToEdit, idToEdit, expenses, dispatch } = this.props;
+    if (askToEdit) {
+      const task = expenses[idToEdit];
+      const { value, description, currency, method, tag } = task;
+      this.setState({
+        value, description, currency, method, tag,
+      });
+      dispatch(setAskToFalse());
+    }
+  }
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -149,14 +157,22 @@ WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   editor: PropTypes.bool.isRequired,
   idToEdit: PropTypes.number.isRequired,
-  // expenses: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
+  askToEdit: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ wallet }) => ({
   currencies: wallet.currencies,
-  editor: wallet.editor,
+  askToEdit: wallet.askToEdit,
   idToEdit: wallet.idToEdit,
-  // expenses: wallet.expenses,
+  editor: wallet.editor,
+  expenses: wallet.expenses,
 });
 
 export default connect(mapStateToProps)(WalletForm);
