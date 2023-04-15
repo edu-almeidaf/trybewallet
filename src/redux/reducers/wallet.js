@@ -80,6 +80,7 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       askToDelete: false,
+      editor: false,
     };
   default:
     return state;
