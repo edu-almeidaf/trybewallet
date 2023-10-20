@@ -80,8 +80,8 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = this.state;
     const { currencies, editor } = this.props;
     return (
-      <div className="wallet-form">
-        <form>
+      <div className="wallet-form-container">
+        <form className="wallet-form">
           <input
             type="number"
             data-testid="value-input"

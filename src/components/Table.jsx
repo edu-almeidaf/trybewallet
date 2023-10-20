@@ -17,61 +17,64 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-        </thead>
-        {
-          expenses?.map((expense) => {
-            const {
-              id, description, tag, method, value, currency, exchangeRates,
-            } = expense;
-            const ask = Number(exchangeRates[currency].ask);
-            const sumTask = Number(value) * ask;
-            const { name } = exchangeRates[currency];
-            return (
-              <tbody key={ id }>
-                <tr>
-                  <td>{ description }</td>
-                  <td>{ tag }</td>
-                  <td>{ method }</td>
-                  <td>{ Number(value).toFixed(2) }</td>
-                  <td>{ name }</td>
-                  <td>{ ask.toFixed(2) }</td>
-                  <td>{ sumTask.toFixed(2) }</td>
-                  <td>Real</td>
-                  <td>
-                    <button
-                      type="button"
-                      data-testid="delete-btn"
-                      onClick={ () => this.handleClick(id) }
-                    >
-                      Excluir
-                    </button>
-                    <button
-                      type="button"
-                      data-testid="edit-btn"
-                      onClick={ () => this.dispatchExpense(id) }
-                    >
-                      Editar
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            );
-          })
-        }
-      </table>
+      <>
+        <table>
+          <thead>
+            <tr className="table-header">
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
+          </thead>
+          {
+            expenses?.map((expense) => {
+              const {
+                id, description, tag, method, value, currency, exchangeRates,
+              } = expense;
+              const ask = Number(exchangeRates[currency].ask);
+              const sumTask = Number(value) * ask;
+              const { name } = exchangeRates[currency];
+              return (
+                <tbody key={ id }>
+                  <tr>
+                    <td>{ description }</td>
+                    <td>{ tag }</td>
+                    <td>{ method }</td>
+                    <td>{ Number(value).toFixed(2) }</td>
+                    <td>{ name }</td>
+                    <td>{ ask.toFixed(2) }</td>
+                    <td>{ sumTask.toFixed(2) }</td>
+                    <td>Real</td>
+                    <td>
+                      <button
+                        type="button"
+                        data-testid="delete-btn"
+                        onClick={ () => this.handleClick(id) }
+                      >
+                        Excluir
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="edit-btn"
+                        onClick={ () => this.dispatchExpense(id) }
+                      >
+                        Editar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })
+          }
+        </table>
+        { expenses.length === 0 && <div>Nenhuma tarefa adicionada</div>}
+      </>
     );
   }
 }

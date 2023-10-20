@@ -1,0 +1,42 @@
+.wallet-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 3rem;
+  margin-bottom: 1rem;
+}
+
+.total-field-icon {
+  font-size: 2rem;
+  color: #FEC242;
+}
+
+header p {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wallet-form-container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background-color: blue;
+}
+
+.wallet-form {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.table-header {
+  width: 100vw;
+}

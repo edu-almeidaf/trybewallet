@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { GiPiggyBank } from 'react-icons/gi';
 
 class Header extends Component {
   sumExpenses = () => {
@@ -17,7 +18,7 @@ class Header extends Component {
       <header>
         <h1 data-testid="email-field">{ email }</h1>
         <p>
-          Despesa total:
+          <GiPiggyBank className="total-field-icon" />
           {' '}
           <span data-testid="total-field">{ this.sumExpenses().toFixed(2) }</span>
           {' '}
